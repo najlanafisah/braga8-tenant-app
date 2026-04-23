@@ -1,6 +1,6 @@
 import 'package:braga8_tenant_app/views/complain/complains_screen.dart';
 import 'package:braga8_tenant_app/views/complain/components/delete_modal.dart';
-import 'package:braga8_tenant_app/views/complain/components/view_media.dart';
+import 'package:braga8_tenant_app/widgets/view_media.dart';
 import 'package:braga8_tenant_app/views/complain/edit_laporan_screen.dart';
 import 'package:braga8_tenant_app/widgets/light_brown_btn.dart';
 import 'package:braga8_tenant_app/widgets/main_layouts.dart';

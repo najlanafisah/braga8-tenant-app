@@ -1,4 +1,4 @@
-import 'package:braga8_tenant_app/views/complain/components/edit_media.dart';
+import 'package:braga8_tenant_app/widgets/edit_media.dart';
 import 'package:braga8_tenant_app/views/complain/components/header_title.dart';
 import 'package:braga8_tenant_app/views/complain/components/input_form.dart';
 import 'package:braga8_tenant_app/widgets/light_brown_btn.dart';

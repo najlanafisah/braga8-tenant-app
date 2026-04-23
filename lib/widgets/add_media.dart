@@ -23,7 +23,7 @@ class AddMedia extends StatelessWidget {
       children: [
         Text(label, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500)),
         SizedBox(height: 10),
-        GestureDetector(
+        InkWell(
           onTap: onPickImage,
           child: Container(
             height: 200,

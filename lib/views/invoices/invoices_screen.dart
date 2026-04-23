@@ -1,4 +1,5 @@
 import 'package:braga8_tenant_app/views/invoices/components/status_badge.dart';
+import 'package:braga8_tenant_app/views/invoices/payment_form_screen.dart';
 import 'package:braga8_tenant_app/widgets/action_button_table.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/table_card.dart';
@@ -154,7 +155,19 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                                   label: "Pay".toUpperCase(),
                                   icon: Icons.payment,
                                   color: Colors.orange,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PaymentFormScreen(
+                                          data:
+                                              item,
+                                          tenantName:
+                                              tenant['name'],
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ],

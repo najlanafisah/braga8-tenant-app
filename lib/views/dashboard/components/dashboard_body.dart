@@ -20,6 +20,7 @@ class DashboardBody extends StatelessWidget {
       phone: '08325637593', 
       businessType: 'Restaurant', 
       companyName: 'PT. Syukur Mulia',
+      unit: '2A',
     );
 
     return SingleChildScrollView(

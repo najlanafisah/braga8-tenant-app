@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:braga8_tenant_app/services/image_services.dart';
-import 'package:braga8_tenant_app/views/complain/components/add_media.dart';
+import 'package:braga8_tenant_app/widgets/add_media.dart';
 import 'package:braga8_tenant_app/views/complain/components/input_form.dart';
 import 'package:braga8_tenant_app/widgets/light_brown_btn.dart';
 import 'package:braga8_tenant_app/widgets/main_layouts.dart';
@@ -79,7 +79,7 @@ class _AddComplainScreenState extends State<AddComplainScreen> {
                   label: "Foto Komplain (Opsional)",
                   onPickImage: _handlePickImage,
                   btnText: _imageFile == null ? 'Ambil Foto' : 'Ganti Foto',
-                  imageFile: _imageFile, // Kirim filenya ke komponen
+                  imageFile: _imageFile,
                 ),
                 SizedBox(height: 40),
                 LightBrownBtn(

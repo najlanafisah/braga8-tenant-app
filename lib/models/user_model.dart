@@ -4,6 +4,7 @@ class UserModel {
   final String joinDate;
 
   final String tenantName;
+  final String unit;
   final String phone;
   final String businessType;
   final String companyName;
@@ -15,6 +16,7 @@ class UserModel {
     required this.tenantName,
     required this.phone,
     required this.businessType,
-    required this.companyName,
+    required this.companyName, required this.unit,
   });
+
 }

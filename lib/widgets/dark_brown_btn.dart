@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class LightBrownBtn extends StatelessWidget {
+class DarkBrownBtn extends StatelessWidget {
   final VoidCallback? onTap;
   final bool isLoading;
   final String label;
 
-  const LightBrownBtn({
+  const DarkBrownBtn({
     super.key,
     this.onTap,
     this.isLoading = false,
@@ -29,20 +29,20 @@ class LightBrownBtn extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Color(0xFF7A4A2D).withValues(alpha: 0.5),
-                blurRadius: 15,
-                offset: Offset(0, 5),
+                color: Color(0xFF7A4A2D).withValues(alpha: 0.2),
+                blurRadius: 10,
+                offset: Offset(0, 2),
               ),
               BoxShadow(
                 color: Color(0xFFFA6C2A).withValues(alpha: 0.2),
                 blurRadius: 20,
-                offset: Offset(0, 8),
+                offset: Offset(0, 4),
               ),
             ],
           ),
           child: Container(
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 77, 36, 15),
+              color: Color(0xFF2A1207),
               borderRadius: BorderRadius.circular(14.5),
             ),
             alignment: Alignment.center,
