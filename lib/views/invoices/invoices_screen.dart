@@ -1,11 +1,14 @@
 import 'package:braga8_tenant_app/views/invoices/components/status_badge.dart';
-import 'package:braga8_tenant_app/views/invoices/payment_form_screen.dart';
-import 'package:braga8_tenant_app/widgets/action_button_table.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/table_card.dart';
 import '../../widgets/page_header.dart';
 import '../../widgets/custom_search_bar.dart';
 import '../../widgets/main_layouts.dart';
+import '../../widgets/action_button_table.dart';
+import 'invoices_detail_screen.dart';
+import 'payment_form_screen.dart';
+import 'view_unit_meter_screen.dart';
+import '../../models/user_model.dart';
 
 class InvoicesScreen extends StatefulWidget {
   const InvoicesScreen({super.key});
@@ -18,32 +21,57 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
   final List<Map<String, dynamic>> _allTenants = [
     {
       "name": "Burger Bangor",
-      "isCurrent": true,
       "units_data": [
-        {"total": "Rp. 300,000", "unit": "2A"},
-        {"total": "Rp. 200,000", "unit": "3A"},
+        {
+          "total": "Rp. 537,000",
+          "unit": "2A",
+          "isPaid": true,
+          "water": "Rp. 150,000",
+          "electricity": "Rp. 150,000",
+        },
+        {
+          "total": "Rp. 537,000",
+          "unit": "2B",
+          "isPaid": false,
+          "water": "Rp. 150,000",
+          "electricity": "Rp. 150,000",
+        },
       ],
     },
     {
       "name": "Kopi Kenangan",
-      "isCurrent": false,
       "units_data": [
-        {"total": "Rp. 300,000", "unit": "1B"},
-      ],
-    },
-    {
-      "name": "Indomaret Fresh",
-      "isCurrent": false,
-      "units_data": [
-        {"total": "Rp. 200,000", "unit": "GF1"},
-        {"total": "Rp. 300,000", "unit": "GF2"},
+        {
+          "total": "Rp. 200,000",
+          "unit": "3A",
+          "isPaid": false,
+          "water": "Rp. 150,000",
+          "electricity": "Rp. 150,000",
+        },
       ],
     },
     {
       "name": "Solaria",
-      "isCurrent": false,
       "units_data": [
-        {"total": "Rp. 400,000", "unit": "4C"},
+        {
+          "total": "Rp. 537,000",
+          "unit": "3C",
+          "isPaid": true,
+          "water": "Rp. 150,000",
+          "electricity": "Rp. 150,000",
+        },
+      ],
+    },
+    {
+      "name": "Hokben",
+      "units_data": [
+        {
+          "total": "Rp. 537,000",
+          "unit": "1D",
+          "isPaid": false,
+          "water": "Rp. 150,000",
+          "electricity": "Rp. 150,000",
+        },
       ],
     },
   ];
@@ -59,23 +87,14 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
 
   void _filterData(String query) {
     setState(() {
-      if (query.isEmpty) {
-        _filteredTenants = _allTenants;
-      } else {
-        _filteredTenants = _allTenants
-            .where(
-              (tenant) =>
-                  tenant['name'].toLowerCase().contains(query.toLowerCase()),
-            )
-            .toList();
-      }
+      _filteredTenants = query.isEmpty
+          ? _allTenants
+          : _allTenants
+                .where(
+                  (t) => t['name'].toLowerCase().contains(query.toLowerCase()),
+                )
+                .toList();
     });
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
   }
 
   @override
@@ -90,134 +109,142 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
               children: [
                 SizedBox(height: 40),
                 PageHeader(
-                  title: "Meter Analytics",
+                  title: "Invoices",
                   subtitle: "Braga8 Utility Billing Management",
                 ),
                 SizedBox(height: 30),
                 CustomSearchBar(
                   controller: _searchController,
                   hintText: "Cari Tenant / Unit...",
-                  onChanged: (value) => _filterData(value),
+                  onChanged: _filterData,
                   onSearchPressed: () => _filterData(_searchController.text),
                 ),
                 SizedBox(height: 30),
-                if (_filteredTenants.isEmpty)
-                  Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 20),
-                      child: Text(
-                        "Data tidak ditemukan",
-                        style: TextStyle(color: Colors.white24),
-                      ),
-                    ),
-                  )
-                else
-                  ..._filteredTenants.map((tenant) {
-                    final bool isCurrent = tenant['isCurrent'] ?? false;
+                // Di dalam map units_data:
+                ..._filteredTenants.map((tenant) {
+                  return Column(
+                    children: (tenant['units_data'] as List).map((item) {
+                      final bool isPaid = item['isPaid'] ?? false;
 
-                    if (isCurrent) {
-                      return TableCard(
-                        key: ValueKey("${tenant['name']}-current"),
-                        prefix: "Tenant:",
-                        columnWidths: {
-                          0: FixedColumnWidth(50),
-                          1: FixedColumnWidth(100),
-                          2: FlexColumnWidth(1.6),
-                        },
-                        main: tenant['name'],
-                        columns: ["Unit", "Total", "Actions"],
-                        data: List<Map<String, dynamic>>.from(
-                          tenant['units_data'],
-                        ),
-                        rowBuilder: (item) => [
-                          Text(
-                            item['unit'],
-                            style: TextStyle(color: Colors.white),
+                      if (isPaid) {
+                        return TableCard(
+                          key: ValueKey(
+                            "${tenant['name']}-${item['unit']}-paid",
                           ),
-                          Text(
-                            item['total'],
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Row(
-                            // 2 Tombol
-                            children: [
-                              Expanded(
-                                child: ActionButtonTable(
-                                  label: "View",
-                                  icon: Icons.visibility,
-                                  color: Colors.blueGrey,
-                                  onPressed: () {},
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                              Expanded(
-                                child: ActionButtonTable(
-                                  label: "Pay".toUpperCase(),
-                                  icon: Icons.payment,
-                                  color: Colors.orange,
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => PaymentFormScreen(
-                                          data:
-                                              item,
-                                          tenantName:
-                                              tenant['name'],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      );
-                    } else {
-                      return TableCard(
-                        key: ValueKey("${tenant['name']}-past"),
-                        prefix: "Tenant:",
-                        columnWidths: {
-                          0: FixedColumnWidth(60),
-                          1: FlexColumnWidth(1.2),
-                          2: FlexColumnWidth(1),
-                          3: FlexColumnWidth(1),
-                        },
-                        main: tenant['name'],
-                        columns: ["Unit", "Total", "Status", "Actions"],
-                        data: List<Map<String, dynamic>>.from(
-                          tenant['units_data'],
-                        ),
-                        rowBuilder: (item) => [
-                          Text(
-                            item['unit'],
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            item['total'],
-                            style: TextStyle(color: Colors.white),
-                          ),
-
-                          SizedBox(
-                            width: double.infinity,
-                            child: StatusBadge(isPaid: true),
-                          ),
-
-                          SizedBox(
-                            width: double.infinity,
-                            child: ActionButtonTable(
+                          prefix: "Tenant:",
+                          main: tenant['name'],
+                          columnWidths: {
+                            0: FixedColumnWidth(60),
+                            1: FlexColumnWidth(1.2),
+                            2: FlexColumnWidth(1),
+                            3: FlexColumnWidth(1),
+                          },
+                          columns: ["Unit", "Total", "Status", "Actions"],
+                          data: [item],
+                          rowBuilder: (data) => [
+                            Text(
+                              data['unit'],
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Text(
+                              data['total'],
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            StatusBadge(isPaid: true),
+                            ActionButtonTable(
                               label: "View",
                               icon: Icons.visibility,
                               color: Colors.blueGrey,
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ViewUnitMeterScreen(
+                                      user: UserModel(
+                                        tenantName: tenant['name'],
+                                        unit: data['unit'],
+                                      ),
+                                      invoiceData:
+                                          data, // DATA INI SEKARANG LENGKAP (ADA WATER & ELECTRICITY)
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
+                          ],
+                        );
+                      } else {
+                        return TableCard(
+                          key: ValueKey(
+                            "${tenant['name']}-${item['unit']}-unpaid",
                           ),
-                        ],
-                      );
-                    }
-                  }),
-
+                          prefix: "Tenant:",
+                          main: tenant['name'],
+                          columnWidths: {
+                            0: FixedColumnWidth(50),
+                            1: FixedColumnWidth(100),
+                            2: FlexColumnWidth(1.4),
+                          },
+                          columns: ["Unit", "Total", "Actions"],
+                          data: [item],
+                          rowBuilder: (data) => [
+                            Text(
+                              data['unit'],
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Text(
+                              data['total'],
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ActionButtonTable(
+                                    label: "View",
+                                    icon: Icons.visibility,
+                                    color: Colors.blueGrey,
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              InvoicesDetailScreen(
+                                                data: data,
+                                                tenantName: tenant['name'],
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                                SizedBox(width: 8),
+                                Expanded(
+                                  child: ActionButtonTable(
+                                    label: "PAY",
+                                    icon: Icons.payment,
+                                    color: Colors.orange,
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              PaymentFormScreen(
+                                                data: data,
+                                                tenantName: tenant['name'],
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      }
+                    }).toList(),
+                  );
+                }),
                 SizedBox(height: 50),
               ],
             ),

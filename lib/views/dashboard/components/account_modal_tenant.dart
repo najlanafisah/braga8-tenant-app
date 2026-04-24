@@ -74,7 +74,7 @@ class AccountModalTenant extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          user.tenantName,
+                          user.tenantName!,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -82,7 +82,7 @@ class AccountModalTenant extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "@${user.username.replaceFirst('@', '')}",
+                          "@${user.username!.replaceFirst('@', '')}",
                           style: TextStyle(color: Colors.grey, fontSize: 14),
                         ),
                       ],
@@ -96,13 +96,13 @@ class AccountModalTenant extends StatelessWidget {
                     Expanded(
                       child: _buildInfoTile(
                         "Tenant Name",
-                        user.tenantName,
+                        user.tenantName!,
                       ),
                     ),
                     Expanded(
                       child: _buildInfoTile(
                         "Phone",
-                        user.phone,
+                        user.phone!,
                       ),
                     ),
                   ],
@@ -113,13 +113,13 @@ class AccountModalTenant extends StatelessWidget {
                     Expanded(
                       child: _buildInfoTile(
                         "Business Type",
-                        user.businessType,
+                        user.businessType!,
                       ),
                     ),
                     Expanded(
                       child: _buildInfoTile(
                         "Company Name",
-                        user.companyName,
+                        user.companyName!,
                       ),
                     ),
                   ],
@@ -127,8 +127,8 @@ class AccountModalTenant extends StatelessWidget {
                 SizedBox(height: 20),
                 Row(
                   children: [
-                    Expanded(child: _buildInfoTile("Email", user.email)),
-                    Expanded(child: _buildInfoTile("Join Date", user.joinDate)),
+                    Expanded(child: _buildInfoTile("Email", user.email!)),
+                    Expanded(child: _buildInfoTile("Join Date", user.joinDate!)),
                   ],
                 ),
 

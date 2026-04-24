@@ -12,12 +12,10 @@ import 'package:permission_handler/permission_handler.dart';
 
 class PaymentFormScreen extends StatefulWidget {
   final Map<String, dynamic> data;
-  final String tenantName;
 
   const PaymentFormScreen({
     super.key,
-    required this.data,
-    required this.tenantName,
+    required this.data, required tenantName,
   });
 
   @override
@@ -136,6 +134,7 @@ class _PaymentFormScreenPageState extends State<PaymentFormScreen> {
                             context,
                             title: "Pembayaran Berhasil Dikirim!",
                             onConfirm: () {
+                              Navigator.pop(context); 
                               Navigator.pop(context); 
                               Navigator.pop(context); 
                             },

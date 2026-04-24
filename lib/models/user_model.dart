@@ -1,22 +1,22 @@
 class UserModel {
-  final String username;
-  final String email;
-  final String joinDate;
+  final String? username;
+  final String? email;
+  final String? joinDate;
 
-  final String tenantName;
-  final String unit;
-  final String phone;
-  final String businessType;
-  final String companyName;
+  final String? tenantName;
+  final String? unit;
+  final String? phone;
+  final String? businessType;
+  final String? companyName;
 
   UserModel({
-    required this.username,
-    required this.email,
-    required this.joinDate,
-    required this.tenantName,
-    required this.phone,
-    required this.businessType,
-    required this.companyName, required this.unit,
+    this.username,
+    this.email,
+    this.joinDate,
+    this.tenantName,
+    this.phone,
+    this.businessType,
+    this.companyName,
+    this.unit,
   });
-
 }
