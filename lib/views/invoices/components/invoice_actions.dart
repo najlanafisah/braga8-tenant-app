@@ -1,9 +1,10 @@
+import 'package:braga8_tenant_app/models/tenant_model.dart';
 import 'package:braga8_tenant_app/widgets/action_button_table.dart';
 import 'package:flutter/material.dart';
 
 class InvoiceActions extends StatelessWidget {
-  final Map<String, dynamic> data;
-  final String tenantName;
+  final Unit data;
+final String tenantName;
 
   const InvoiceActions({
     super.key, 
@@ -22,7 +23,7 @@ class InvoiceActions extends StatelessWidget {
             icon: Icons.file_download,
             color: Colors.blueAccent, // Warna biru
             onPressed: () {
-              print("Exporting invoice for ${data['unit']}...");
+              print("Exporting invoice for data.unit");
             },
           ),
         ),
@@ -34,7 +35,7 @@ class InvoiceActions extends StatelessWidget {
             icon: Icons.picture_as_pdf,
             color: Colors.redAccent, // Warna merah
             onPressed: () {
-              print("Opening PDF for ${data['unit']}...");
+              print("Opening PDF for data.unit");
             },
           ),
         ),

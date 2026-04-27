@@ -9,13 +9,22 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:braga8_tenant_app/models/tenant_model.dart';
 
 class PaymentFormScreen extends StatefulWidget {
-  final Map<String, dynamic> data;
+  final Unit data;
+  final String? tenantName;
+  final String meterType;
+  final String amount;
+  final String meterId;
 
   const PaymentFormScreen({
     super.key,
-    required this.data, required tenantName,
+    required this.data,
+    required this.tenantName,
+    required this.meterType,
+    required this.amount,
+    required this.meterId,
   });
 
   @override
@@ -33,7 +42,7 @@ class _PaymentFormScreenPageState extends State<PaymentFormScreen> {
     'Tunai/Cash',
   ];
 
-    final ImageService _imageService = ImageService();
+  final ImageService _imageService = ImageService();
 
   Future<void> _handlePickImage() async {
     if (!kIsWeb) {
@@ -44,8 +53,7 @@ class _PaymentFormScreenPageState extends State<PaymentFormScreen> {
     File? file = await _imageService.pickImage(fromGallery: kIsWeb);
 
     if (file != null) {
-      setState(() {
-      });
+      setState(() {});
     }
   }
 
@@ -62,7 +70,7 @@ class _PaymentFormScreenPageState extends State<PaymentFormScreen> {
   @override
   void initState() {
     super.initState();
-    String rawAmount = widget.data['total'].replaceAll(RegExp(r'[^0-9]'), '');
+    String rawAmount = widget.amount.replaceAll(RegExp(r'[^0-9]'), '');
     _amountController = TextEditingController(text: _formatCurrency(rawAmount));
   }
 
@@ -91,7 +99,7 @@ class _PaymentFormScreenPageState extends State<PaymentFormScreen> {
                       ),
                     ),
                     Text(
-                      "Unit ${widget.data['unit']}",
+                      "Unit ${widget.data.unit}",
                       style: TextStyle(color: Colors.white38, fontSize: 18),
                     ),
                     SizedBox(height: 30),
@@ -113,7 +121,7 @@ class _PaymentFormScreenPageState extends State<PaymentFormScreen> {
                     AddMedia(
                       label: "Tambahkan Bukti Foto Pembayaran",
                       onPickImage: () {
-                         _handlePickImage();
+                        _handlePickImage();
                       },
                       btnText: "Pilih Foto",
                     ),
@@ -134,9 +142,9 @@ class _PaymentFormScreenPageState extends State<PaymentFormScreen> {
                             context,
                             title: "Pembayaran Berhasil Dikirim!",
                             onConfirm: () {
-                              Navigator.pop(context); 
-                              Navigator.pop(context); 
-                              Navigator.pop(context); 
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
                             },
                           );
                         },
