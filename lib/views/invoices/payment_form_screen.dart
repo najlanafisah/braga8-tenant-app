@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:braga8_tenant_app/models/invoice_modal.dart';
 import 'package:braga8_tenant_app/services/image_services.dart';
+import 'package:braga8_tenant_app/views/dashboard/dashboard_screen.dart';
 import 'package:braga8_tenant_app/views/invoices/components/custom_text_field.dart';
 import 'package:braga8_tenant_app/widgets/add_media.dart';
 import 'package:braga8_tenant_app/widgets/dark_brown_btn.dart';
@@ -142,8 +143,14 @@ class _PaymentFormScreenPageState extends State<PaymentFormScreen> {
                             context,
                             title: "Pembayaran Berhasil Dikirim!",
                             onConfirm: () {
-                              Navigator.pop(context);
-                              Navigator.pop(context);
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      DashboardScreen(initialIndex: 2),
+                                ),
+                                (route) => false,
+                              );
                             },
                           );
                         },

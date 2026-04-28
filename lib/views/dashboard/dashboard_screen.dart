@@ -8,14 +8,22 @@ import '../../widgets/main_layouts.dart';
 import 'components/dashboard_body.dart';
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
+  final int initialIndex;
+
+  const DashboardScreen({super.key, this.initialIndex = 0});
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -30,7 +38,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       MeterAnalyticsScreen(),
       InvoicesScreen(),
       HistoryScreen(),
-      ComplainsScreen()
+      ComplainsScreen(),
     ];
 
     return Scaffold(
