@@ -13,14 +13,13 @@ class DashboardBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserModel dummyUser = UserModel(
-      username: "@jimmy_braga",
+      username: "@lala_braga",
       joinDate: "Jan 2026",
-      email: "jimmy@gmail.com",
-      tenantName: 'Jimmy', 
+      email: "lala@gmail.com",
+      tenantName: 'lala', 
       phone: '08325637593', 
       businessType: 'Restaurant', 
-      companyName: 'PT. Syukur Mulia',
-      unit: '2A',
+      companyName: 'Solaria', units: [],
     );
 
     return SingleChildScrollView(

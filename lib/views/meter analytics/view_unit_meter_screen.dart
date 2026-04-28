@@ -1,5 +1,6 @@
+import 'package:braga8_tenant_app/models/invoice_modal.dart';
+import 'package:braga8_tenant_app/models/unit_model.dart';
 import 'package:flutter/material.dart';
-import 'package:braga8_tenant_app/models/tenant_model.dart';
 import 'package:braga8_tenant_app/models/user_model.dart';
 import 'package:braga8_tenant_app/views/meter%20analytics/components/meter_detail_card.dart';
 import 'package:braga8_tenant_app/widgets/dark_brown_btn.dart';
@@ -8,12 +9,13 @@ import 'package:braga8_tenant_app/widgets/view_media.dart';
 
 class ViewUnitMeterScreen extends StatelessWidget {
   final UserModel user;
-  final Unit invoiceData;
+  final Unit unit;
+  final Invoice invoiceData;
 
-  const ViewUnitMeterScreen({
+   const ViewUnitMeterScreen({
     super.key,
     required this.user,
-    required this.invoiceData,
+    required this.invoiceData, required this.unit,
   });
 
   @override
@@ -24,17 +26,17 @@ class ViewUnitMeterScreen extends StatelessWidget {
         children: [
           MainLayout(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding:  EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 40),
+                   SizedBox(height: 40),
                   MeterDetailCard(
                     user: user,
                     invoiceData: invoiceData,
-                    onStatusPressed: (val) {},
+                    onStatusPressed: (val) {}, unit: unit,
                   ),
-                  const SizedBox(height: 30),
+                   SizedBox(height: 30),
                   ViewMedia(
                     label: "Bukti Meter Air",
                     imagePath: "../../../assets/meter-sample.png",

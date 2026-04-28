@@ -1,22 +1,25 @@
-class UserModel {
-  final String? username;
-  final String? email;
-  final String? joinDate;
+import 'unit_model.dart';
 
-  final String? tenantName;
-  final String? unit;
-  final String? phone;
-  final String? businessType;
-  final String? companyName;
+class UserModel {
+  final String username;
+  final String email;
+  final String joinDate;
+
+  final String tenantName;
+  final String phone;
+  final String businessType;
+  final String companyName;
+
+  final List<Unit> units;
 
   UserModel({
-    this.username,
-    this.email,
-    this.joinDate,
-    this.tenantName,
-    this.phone,
-    this.businessType,
-    this.companyName,
-    this.unit,
+    required this.username,
+    required this.email,
+    required this.joinDate,
+    required this.tenantName,
+    required this.phone,
+    required this.businessType,
+    required this.companyName,
+    required this.units,
   });
 }

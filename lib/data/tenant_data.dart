@@ -1,66 +1,64 @@
-import '../models/tenant_model.dart';
+import 'package:braga8_tenant_app/models/invoice_modal.dart';
+import 'package:braga8_tenant_app/models/unit_model.dart';
+import 'package:braga8_tenant_app/models/user_model.dart';
 
-final List<Tenant> allTenants = [
-  Tenant(
-    name: "Burger Bangor",
-    units: [
-      Unit(
-        unit: "2A",
-        floor: "2",
-        electricityUsage: 403,
-        waterUsage: 233,
-        isPaid: true,
-      ),
-      Unit(
-        unit: "3A",
-        floor: "2",
-        electricityUsage: 410,
-        waterUsage: 240,
-        isPaid: false,
-      ),
-    ],
-  ),
-  Tenant(
-    name: "Kopi Kenangan",
-    units: [
-      Unit(
-        unit: "1B",
-        floor: "1",
-        electricityUsage: 850,
-        waterUsage: 220,
-        isPaid: false,
-      ),
-    ],
-  ),
-  Tenant(
-    name: "Indomaret Fresh",
-    units: [
-      Unit(
-        unit: "GF1",
-        floor: "G",
-        electricityUsage: 503,
-        waterUsage: 433,
-        isPaid: true,
-      ),
-      Unit(
-        unit: "GF2",
-        floor: "G",
-        electricityUsage: 603,
-        waterUsage: 453,
-        isPaid: false,
-      ),
-    ],
-  ),
-  Tenant(
-    name: "Solaria",
-    units: [
-      Unit(
-        unit: "4C",
-        floor: "4",
-        electricityUsage: 403,
-        waterUsage: 563,
-        isPaid: false,
-      ),
-    ],
-  ),
-];
+final UserModel dummyUser = UserModel(
+  username: 'Akhmad',
+  email: 'akhmad@gmail.com',
+  joinDate: 'Juni 2009',
+  tenantName: "Akhmad",
+  companyName: "Solaria",
+  phone: "0812345678",
+  businessType: "Restaurant",
+
+  units: [
+    Unit(
+      unit: "2A",
+      floor: "2",
+      invoices: [
+        Invoice(
+          month: "Desember",
+          electricityUsage: 400,
+          waterUsage: 200,
+          isPaid: true,
+        ),
+        Invoice(
+          month: "Januari",
+          electricityUsage: 420,
+          waterUsage: 210,
+          isPaid: true,
+        ),
+        Invoice(
+          month: "Februari",
+          electricityUsage: 450,
+          waterUsage: 230,
+          isPaid: false,
+        ),
+      ],
+    ),
+    Unit(
+      unit: "2B",
+      floor: "2",
+      invoices: [
+        Invoice(
+          month: "Desember",
+          electricityUsage: 300,
+          waterUsage: 180,
+          isPaid: true,
+        ),
+        Invoice(
+          month: "Januari",
+          electricityUsage: 320,
+          waterUsage: 190,
+          isPaid: true,
+        ),
+        Invoice(
+          month: "Februari",
+          electricityUsage: 220,
+          waterUsage: 200,
+          isPaid: false,
+        ),
+      ],
+    ),
+  ],
+);

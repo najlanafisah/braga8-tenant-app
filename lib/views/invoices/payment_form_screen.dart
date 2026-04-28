@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:braga8_tenant_app/models/invoice_modal.dart';
 import 'package:braga8_tenant_app/services/image_services.dart';
 import 'package:braga8_tenant_app/views/invoices/components/custom_text_field.dart';
 import 'package:braga8_tenant_app/widgets/add_media.dart';
@@ -9,22 +10,21 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:braga8_tenant_app/models/tenant_model.dart';
 
 class PaymentFormScreen extends StatefulWidget {
-  final Unit data;
-  final String? tenantName;
+  final Invoice data;
+  final String tenantName;
   final String meterType;
   final String amount;
   final String meterId;
 
   const PaymentFormScreen({
     super.key,
-    required this.data,
     required this.tenantName,
     required this.meterType,
     required this.amount,
     required this.meterId,
+    required this.data,
   });
 
   @override
@@ -99,7 +99,7 @@ class _PaymentFormScreenPageState extends State<PaymentFormScreen> {
                       ),
                     ),
                     Text(
-                      "Unit ${widget.data.unit}",
+                      "Unit ${widget.data.waterUsage}",
                       style: TextStyle(color: Colors.white38, fontSize: 18),
                     ),
                     SizedBox(height: 30),
@@ -142,7 +142,6 @@ class _PaymentFormScreenPageState extends State<PaymentFormScreen> {
                             context,
                             title: "Pembayaran Berhasil Dikirim!",
                             onConfirm: () {
-                              Navigator.pop(context);
                               Navigator.pop(context);
                               Navigator.pop(context);
                             },

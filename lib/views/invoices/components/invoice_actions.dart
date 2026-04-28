@@ -1,9 +1,9 @@
-import 'package:braga8_tenant_app/models/tenant_model.dart';
+import 'package:braga8_tenant_app/models/invoice_modal.dart';
 import 'package:braga8_tenant_app/widgets/action_button_table.dart';
 import 'package:flutter/material.dart';
 
 class InvoiceActions extends StatelessWidget {
-  final Unit data;
+  final Invoice data;
 final String tenantName;
 
   const InvoiceActions({
