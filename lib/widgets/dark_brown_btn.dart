@@ -18,7 +18,7 @@ class DarkBrownBtn extends StatelessWidget {
       child: GestureDetector(
         onTap: isLoading ? null : onTap,
         child: Container(
-          height: 10,
+          height: 60,
           padding: EdgeInsets.all(1.5),
           decoration: BoxDecoration(
             gradient: RadialGradient(

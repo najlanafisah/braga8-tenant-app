@@ -12,10 +12,11 @@ class ViewUnitMeterScreen extends StatelessWidget {
   final Unit unit;
   final Invoice invoiceData;
 
-   const ViewUnitMeterScreen({
+  const ViewUnitMeterScreen({
     super.key,
     required this.user,
-    required this.invoiceData, required this.unit,
+    required this.invoiceData,
+    required this.unit,
   });
 
   @override
@@ -26,17 +27,17 @@ class ViewUnitMeterScreen extends StatelessWidget {
         children: [
           MainLayout(
             child: SingleChildScrollView(
-              padding:  EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   SizedBox(height: 40),
                   MeterDetailCard(
                     user: user,
                     invoiceData: invoiceData,
-                    onStatusPressed: (val) {}, unit: unit,
+                    onStatusPressed: (val) {},
+                    unit: unit,
                   ),
-                   SizedBox(height: 30),
+                  SizedBox(height: 30),
                   ViewMedia(
                     label: "Bukti Meter Air",
                     imagePath: "../../../assets/meter-sample.png",
@@ -46,6 +47,7 @@ class ViewUnitMeterScreen extends StatelessWidget {
                     label: "Bukti Meter Listrik",
                     imagePath: "../../../assets/meter-sample.png",
                   ),
+                  SizedBox(height: 80),
                 ],
               ),
             ),

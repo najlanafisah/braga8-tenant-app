@@ -28,11 +28,10 @@ class InvoicesDetailScreen extends StatelessWidget {
         children: [
           MainLayout(
             child: SingleChildScrollView(
-              padding:  EdgeInsets.symmetric(horizontal: 20),
+              padding:  EdgeInsets.symmetric(horizontal: 20, vertical: 40),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   SizedBox(height: 40),
                   Text(
                     tenantName,
                     style:  TextStyle(
@@ -100,6 +99,7 @@ class InvoicesDetailScreen extends StatelessWidget {
                     label: "Bukti Meter Air",
                     imagePath: "assets/meter-sample.png",
                   ),
+                  SizedBox(height: 80)
                 ],
               ),
             ),
